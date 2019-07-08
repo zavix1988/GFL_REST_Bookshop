@@ -12,7 +12,7 @@ class Rest
 
 
 
-    public function dispatch($url)
+    public static function dispatch($url)
     {
         self::$method = $_SERVER['REQUEST_METHOD'];
 
