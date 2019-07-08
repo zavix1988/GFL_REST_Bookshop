@@ -1,15 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.7.7
+-- version 4.6.6deb5
 -- https://www.phpmyadmin.net/
 --
--- Хост: 127.0.0.1:3306
--- Время создания: Июл 08 2019 г., 07:09
--- Версия сервера: 5.7.20-log
--- Версия PHP: 7.2.0
+-- Хост: localhost:3306
+-- Время создания: Июл 08 2019 г., 16:16
+-- Версия сервера: 10.1.40-MariaDB-0ubuntu0.18.04.1
+-- Версия PHP: 7.2.19-0ubuntu0.18.04.1
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
-START TRANSACTION;
 SET time_zone = "+00:00";
 
 
@@ -21,104 +19,6 @@ SET time_zone = "+00:00";
 --
 -- База данных: `user12`
 --
-
--- --------------------------------------------------------
-
---
--- Структура таблицы `ashop_brands`
---
-
-CREATE TABLE `ashop_brands` (
-  `id` int(10) NOT NULL,
-  `name` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Дамп данных таблицы `ashop_brands`
---
-
-INSERT INTO `ashop_brands` (`id`, `name`) VALUES
-(1, 'Ford'),
-(2, 'Toyota'),
-(3, 'Audi'),
-(4, 'Skoda'),
-(5, 'ВАЗ');
-
--- --------------------------------------------------------
-
---
--- Структура таблицы `ashop_cars`
---
-
-CREATE TABLE `ashop_cars` (
-  `id` int(10) NOT NULL,
-  `brand_id` int(10) NOT NULL,
-  `model` varchar(60) NOT NULL,
-  `year` int(10) NOT NULL,
-  `displacement` float NOT NULL,
-  `color` varchar(60) NOT NULL,
-  `max_speed` int(10) NOT NULL,
-  `price` int(10) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Дамп данных таблицы `ashop_cars`
---
-
-INSERT INTO `ashop_cars` (`id`, `brand_id`, `model`, `year`, `displacement`, `color`, `max_speed`, `price`) VALUES
-(1, 1, 'Fiesta', 2008, 1.25, 'green', 170, 5200),
-(2, 1, 'Focus', 2010, 1.9, 'blue', 185, 7600),
-(3, 2, 'Corolla', 2011, 1.6, 'black', 190, 11900),
-(4, 4, 'Octavia', 2001, 1.6, 'grey', 180, 5100),
-(5, 1, 'Mondeo', 2008, 2.5, 'black', 230, 11500);
-
--- --------------------------------------------------------
-
---
--- Структура таблицы `ashop_orders`
---
-
-CREATE TABLE `ashop_orders` (
-  `id` int(10) NOT NULL,
-  `car_id` int(10) NOT NULL,
-  `first_name` varchar(60) NOT NULL,
-  `last_name` varchar(60) NOT NULL,
-  `payment` enum('cash','credit_card') NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Дамп данных таблицы `ashop_orders`
---
-
-INSERT INTO `ashop_orders` (`id`, `car_id`, `first_name`, `last_name`, `payment`) VALUES
-(1, 1, 'Alex', 'Zhukov', 'credit_card'),
-(2, 4, 'Evgen', 'Batikov', 'cash'),
-(3, 2, 'Darth', 'Vader', 'credit_card'),
-(4, 2, 'Жуков', 'Алексей', 'credit_card');
-
--- --------------------------------------------------------
-
---
--- Структура таблицы `ashop_users`
---
-
-CREATE TABLE `ashop_users` (
-  `id` int(10) NOT NULL,
-  `login` varchar(255) NOT NULL,
-  `password` varchar(255) NOT NULL,
-  `first_name` varchar(255) NOT NULL,
-  `last_name` varchar(255) NOT NULL,
-  `email` varchar(255) NOT NULL,
-  `token` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Дамп данных таблицы `ashop_users`
---
-
-INSERT INTO `ashop_users` (`id`, `login`, `password`, `first_name`, `last_name`, `email`, `token`) VALUES
-(1, 'zavix', '$2y$10$Powxf.CwMwZxMVugYJ740uS/or.xGoGHUHugIBpRv.9tWon63sE0m', 'Alex', 'Zhukov', 'zavix1988@mksat.net', '1c982783e54e64ea3a4fbba0e55d1350'),
-(2, 'zavix1', '$2y$10$anG0hlPQGZvIORrxv67w4eolatRSMgzLIa8BiHonm1ZQNBScdkCp2', 'Alex', 'Zhukov', 'zavix1988@mksat.net', '');
 
 -- --------------------------------------------------------
 
@@ -372,35 +272,17 @@ CREATE TABLE `bookshop_users` (
 --
 
 INSERT INTO `bookshop_users` (`id`, `first_name`, `last_name`, `email`, `password_hash`, `token`, `role`, `banned`, `discount_id`, `login`) VALUES
-(1, 'Одмен', 'Одменский', 'admin@webmaster.loc', '', '', 'admin', 0, 0, 'admin');
+(1, 'Одмен', 'Одменский', 'admin@webmaster.loc', '', '', 'admin', 0, 0, 'admin'),
+(2, 'Алексей', 'Жуков', 'zavix1988@gmail.com', '$2y$10$vRHisl2pho8slppxS9hP6uKf.s7zLPwPpxZd6VqQn2BkQpBxfdS/O', '', 'user', 0, 1, 'zavix'),
+(3, 'Алексей', 'Жуков', 'zavix1988@gmail.com', '$2y$10$hN6.L1jP7o0IaePjNgZAOuAbAgGfRWEJcXZ6etsGSw4FPPdbN2UNa', '', 'user', 0, 1, 'zavix1'),
+(4, 'Алексей', 'Жуков', 'zavix1988@gmail.com', '$2y$10$ODAuusRYl8RMo0kWAPxefezhQxrZXuenhn6Lps5nTQD7LIhP1HlnG', '', 'user', 0, 1, 'zavix1988@gmail.com'),
+(5, 'Алексей', 'Жуков', 'zavix1988@gmail.com', '$2y$10$LMazlOSjWNgwPA6OLVfw4eTH8h1xevm2JHSI1JNm./r3JndKR8K3G', '', 'user', 0, 1, 'user1');
+
+
 
 --
 -- Индексы сохранённых таблиц
 --
-
---
--- Индексы таблицы `ashop_brands`
---
-ALTER TABLE `ashop_brands`
-  ADD PRIMARY KEY (`id`);
-
---
--- Индексы таблицы `ashop_cars`
---
-ALTER TABLE `ashop_cars`
-  ADD PRIMARY KEY (`id`);
-
---
--- Индексы таблицы `ashop_orders`
---
-ALTER TABLE `ashop_orders`
-  ADD PRIMARY KEY (`id`);
-
---
--- Индексы таблицы `ashop_users`
---
-ALTER TABLE `ashop_users`
-  ADD PRIMARY KEY (`id`);
 
 --
 -- Индексы таблицы `bookshop_authors`
@@ -473,96 +355,60 @@ ALTER TABLE `bookshop_users`
 --
 
 --
--- AUTO_INCREMENT для таблицы `ashop_brands`
---
-ALTER TABLE `ashop_brands`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
-
---
--- AUTO_INCREMENT для таблицы `ashop_cars`
---
-ALTER TABLE `ashop_cars`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
-
---
--- AUTO_INCREMENT для таблицы `ashop_orders`
---
-ALTER TABLE `ashop_orders`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
-
---
--- AUTO_INCREMENT для таблицы `ashop_users`
---
-ALTER TABLE `ashop_users`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
---
 -- AUTO_INCREMENT для таблицы `bookshop_authors`
 --
 ALTER TABLE `bookshop_authors`
   MODIFY `id` int(25) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
 --
 -- AUTO_INCREMENT для таблицы `bookshop_books`
 --
 ALTER TABLE `bookshop_books`
   MODIFY `id` int(25) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
 --
 -- AUTO_INCREMENT для таблицы `bookshop_carts`
 --
 ALTER TABLE `bookshop_carts`
   MODIFY `id` int(25) NOT NULL AUTO_INCREMENT;
-
 --
 -- AUTO_INCREMENT для таблицы `bookshop_cart_statuses`
 --
 ALTER TABLE `bookshop_cart_statuses`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
 --
 -- AUTO_INCREMENT для таблицы `bookshop_deliveries`
 --
 ALTER TABLE `bookshop_deliveries`
   MODIFY `id` int(25) NOT NULL AUTO_INCREMENT;
-
 --
 -- AUTO_INCREMENT для таблицы `bookshop_discounts`
 --
 ALTER TABLE `bookshop_discounts`
   MODIFY `id` int(25) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
 --
 -- AUTO_INCREMENT для таблицы `bookshop_genres`
 --
 ALTER TABLE `bookshop_genres`
   MODIFY `id` int(25) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-
 --
 -- AUTO_INCREMENT для таблицы `bookshop_orders`
 --
 ALTER TABLE `bookshop_orders`
   MODIFY `id` int(25) NOT NULL AUTO_INCREMENT;
-
 --
 -- AUTO_INCREMENT для таблицы `bookshop_order_statuses`
 --
 ALTER TABLE `bookshop_order_statuses`
   MODIFY `id` int(25) NOT NULL AUTO_INCREMENT;
-
 --
 -- AUTO_INCREMENT для таблицы `bookshop_payments`
 --
 ALTER TABLE `bookshop_payments`
   MODIFY `id` int(25) NOT NULL AUTO_INCREMENT;
-
 --
 -- AUTO_INCREMENT для таблицы `bookshop_users`
 --
 ALTER TABLE `bookshop_users`
-  MODIFY `id` int(25) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-COMMIT;
-
+  MODIFY `id` int(25) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

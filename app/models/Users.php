@@ -14,9 +14,9 @@ class Users extends Model
 {
     protected $table = 'users';
 
-    public function create($login, $password, $first_name, $last_name, $email, $discount)
+    public function create($login, $password, $first_name, $last_name, $email)
     {
-        $sql = "INSERT INTO ashop_users (login, password, first_name, last_name, email, role, discount_id) VALUES (?, ?, ?, ?, ?, user, 1)";
+        $sql = "INSERT INTO {$this->table} (login, password_hash, first_name, last_name, email, role, discount_id) VALUES (?, ?, ?, ?, ?, 'user', 1)";
         return $this->pdo->execute($sql, [$login, $password, $first_name, $last_name, $email]);
     }
 

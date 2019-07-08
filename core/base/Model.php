@@ -7,7 +7,7 @@
  */
 
 namespace core\base;
-use core\DB;
+use core\Db;
 
 class Model
 {

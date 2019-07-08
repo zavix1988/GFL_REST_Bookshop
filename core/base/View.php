@@ -16,12 +16,12 @@ class View
     public function __construct($route)
     {
         $this->format = $this->getFormat($route['params']);
+
     }
 
 
     public function handle($data)
     {
-        header('Access-Control-Allow-Origin: *');
         if (!is_array($data)){
             http_response_code(404);
             echo "PAGE NOT FOUND";
@@ -33,6 +33,9 @@ class View
         else
         {
             http_response_code(200);
+            header("Access-Control-Allow-Origin: *");
+            header("Access-Control-Allow-Headers: *");
+
             switch ($this->format)
             {
                 case TO_TEXT :

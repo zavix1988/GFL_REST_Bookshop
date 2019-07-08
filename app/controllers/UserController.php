@@ -24,6 +24,7 @@ class UserController extends Controller
     public function postSignUp($params)
     {
 
+
         $login = CommonHelper::cleanPostString($params['login']);
         $password = CommonHelper::cleanPostString($params['password']);
         $retry = CommonHelper::cleanPostString($params['retry']);
@@ -31,17 +32,20 @@ class UserController extends Controller
         $first_name = CommonHelper::cleanPostString($params['first_name']);
         $last_name = CommonHelper::cleanPostString($params['last_name']);
 
-        if (CommonHelper::check_length($password, 8, 20) && ($password == $retry) && filter_var($email, FILTER_VALIDATE_EMAIL) && CommonHelper::check_length($login, 5, 15) )
+        if (CommonHelper::check_length($password, 8, 20) && ($password == $retry) && filter_var($email, FILTER_VALIDATE_EMAIL) && CommonHelper::check_length($login, 5, 25) )
         {
             if($this->user->isUnique($login))
             {
                 $password = password_hash($password, PASSWORD_DEFAULT);
-                if ($this->user->create($login, $password,$first_name, $last_name, $email, 0)){
+                if ($this->user->create($login, $password,$first_name, $last_name, $email)){
                     $this->setData(['result'=>true]);
                 }
+            }else{
+                $this->setData(['result'=>false, 'unique'=>false]);
             }
+        }else{
+            $this->setData(['result'=>false, 'validation'=>false]);
         }
-        $this->setData(['result'=>false]);
     }
 
     public function putLogIn($params)
